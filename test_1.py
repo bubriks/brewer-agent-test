@@ -9,7 +9,8 @@ def build_agent():
         system_prompt="bbbb",
         llm=None,
         agents=[
-            provider.get_agent("test_2")
+            provider.get_agent("test_2"),
+            provider.get_agent("sum")
         ],
     )
 
