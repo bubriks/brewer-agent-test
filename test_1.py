@@ -1,6 +1,6 @@
 from hopsworks_brewer.framework import Agent, AgentProvider
 
-provider = AgentProvider(repo='https://github.com/logicalclocks/brewer-agent-test.git')
+provider = AgentProvider(repo='https://github.com/bubriks/brewer-agent-test.git')
 
 def build_agent():
     return Agent(
