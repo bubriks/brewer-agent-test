@@ -1,12 +1,13 @@
 from hopsworks_brewer.framework import Agent
+from hopsworks_brewer.models import Registry
 
-def build_agent():
+def test_2():
     return Agent(
-        name="test_2",
+        name=Agent.initializer_name(),
         description="aaaa",
         system_prompt="bbbb",
-        llm=None,
-        agents=[],
+        llm=Registry().get(),
     )
 
-agent = build_agent()
+def add_to_team(team):
+    team.add_agent_initializer(test_2)

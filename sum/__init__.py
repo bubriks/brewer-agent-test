@@ -13,4 +13,5 @@ def build_agent():
         llm=Registry().get(),
     )
 
-agent = build_agent()
+def add_to_team(team):
+    team.add_agent_initializer(build_agent)
