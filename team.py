@@ -1,6 +1,6 @@
 from hopsworks_brewer.framework import Team
 
-import test_p, test_1, test_2
+from . import test_p, test_1, test_2
 
 team = Team()
 
