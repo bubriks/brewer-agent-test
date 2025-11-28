@@ -1,5 +1,10 @@
 from hopsworks_brewer.framework import Team
 
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+
 import test_p
 import test_1
 import test_2
