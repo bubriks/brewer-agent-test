@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{PLUGINS}}
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 1em;
+        background: #fff;
+      }
+      #chart-container {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        min-height: 400px;
+        height: 100%;
+      }
+      canvas {
+        background: #fff;
+      }
+      #error-message {
+        color: red;
+        margin-top: 1em;
+        text-align: center;
+        font-weight: bold;
+        padding: 10px;
+        border: 1px solid red;
+        border-radius: 5px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart-container">
+      <canvas id="myChart"></canvas>
+      <div id="error-message"></div>
+    </div>
+
+    <script>
+      // for resizing
+      window.addEventListener("message", (event) => {
+        const { type, width, height } = event.data;
+        if (type === "wrapper-size") {
+          const container = document.getElementById("chart-container");
+          container.style.height = height + "px";
+          container.style.width = width + "px";
+        }
+      });
+
+      // for propagating command key press and release to parent
+      window.addEventListener("keydown", (e) => {
+        if (e.metaKey || e.ctrlKey) {
+          window.parent.postMessage(
+            {
+              type: "keydown",
+              metaKey: e.metaKey,
+              ctrlKey: e.ctrlKey,
+            },
+            "*"
+          );
+        }
+      });
+      window.addEventListener("keyup", (e) => {
+        window.parent.postMessage(
+          {
+            type: "keyup",
+            metaKey: e.metaKey,
+            ctrlKey: e.ctrlKey,
+          },
+          "*"
+        );
+      });
+    </script>
+
+    <script>
+      async function loadChartData() {
+        const url = "{{DATA_PATH}}";
+
+        const token = localStorage.getItem("token"); // read from local storage for authorization
+        if (!token) {
+          throw new Error("No 'token' found in localStorage.");
+        }
+        const response = await fetch(url, {
+          headers: { Authorization: token },
+        });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        return await response.json();
+      }
+
+      async function initChart() {
+        try {
+          const chartData = await loadChartData();
+
+          // Chart generation code
+          {{SCRIPT}}
+        } catch (error) {
+          console.error("Chart generation error:", error);
+          const errorMsg = document.getElementById("error-message");
+          errorMsg.style.display = "block";
+          errorMsg.textContent = "Failed to generate chart: " + error.message;
+        }
+      }
+
+      initChart();
+    </script>
+  </body>
+</html>

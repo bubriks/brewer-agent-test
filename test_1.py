@@ -3,7 +3,7 @@ from hopsworks_brewer.models import Registry
 from hopsworks_brewer.framework import AgentProvider
 
 def test_1():
-    brewer = AgentProvider(repo='https://github.com/logicalclocks/brewer.git')
+    brewer = AgentProvider(repo='https://github.com/bubriks/brewer-agent-test.git')
     return Agent(
         name=Agent.initializer_name(),
         description="aaaa",
