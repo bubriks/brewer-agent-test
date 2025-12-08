@@ -9,7 +9,7 @@ def test_1():
         description="aaaa",
         system_prompt="bbbb",
         llm=Registry().get(),
-        agents=["test_2", "sum", brewer / "talker"]
+        agents=["test_2", brewer / "talker"]
     )
 
 def add_to_team(team):
