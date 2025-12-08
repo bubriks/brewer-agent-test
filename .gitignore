@@ -1,0 +1,27 @@
+.DS_Store
+/.env
+/.git
+/.venv
+/.vscode
+
+__pycache__
+*.egg-info
+*.ipynb
+*.pyc
+/.pytest_cache
+/.ruff_cache
+/build
+/uv.lock
+
+*.png
+*.zip
+
+# Brewer-specific rules
+!/brewer.png
+/config.yaml*
+/downloads
+/.benchmarks
+/agents.html
+/token.jwt
+/lib
+/storage
