@@ -1,14 +1,6 @@
 from openai import OpenAI
 
 
-def get_docs_index_name():
-    return "hopsworks_docs"
-
-
-def get_docs_index_dimensions():
-    return 1536
-
-
 def get_embedding(text: str, openai_client: OpenAI) -> list[float] | None:
     try:
         response = openai_client.embeddings.create(
